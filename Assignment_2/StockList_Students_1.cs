@@ -219,27 +219,110 @@ namespace Assignment_2
       return currNodeTwo;
     }
 
-    
-    // FOR STUDENTS
+        // FOR STUDENTS
+        //@author: qing qi
+        //param (Stock)stock : stock that is to be added
+        //param (StockNode)currentNode : current node
+        //param (StockNode)previousNode : previous node
+        //summary      : add node before currentNode
+        //return       : NA
+        //return type  : NA
+        public void AddBefore(Stock stock, StockNode currentNode, StockNode previousNode)
+        {
+            StockNode nodeToAdd = new StockNode(stock);
+            nodeToAdd.Next = currentNode;
+            previousNode.Next = nodeToAdd;
+        }
 
-    //param        : NA
-    //summary      : Sort the list by descending number of holdings
-    //return       : NA
-    //return type  : NA
-    public void SortByValue()
-    {
-      // write your implementation here
+        //@author: qing qi
+        //param        : NA
+        //summary      : Sort the list by descending number of holdings
+        //return       : NA
+        //return type  : NA
+        public void SortByValue()
+        {
+            StockNode currentNode = this.head;
+            StockList result = new StockList();
+            StockNode previousNode = null;
+            for (; currentNode != null; currentNode = currentNode.Next)
+            {
+                StockNode resultNode = result.head;
+                while (true)
+                {
+                    if (resultNode == null)
+                    {
+                        result.AddLast(currentNode.StockHolding);
+                        break;
+                    }
+                    else if (currentNode.StockHolding.Holdings > resultNode.StockHolding.Holdings)//compare holding value
+                    {
+                        //if the the previous node of current Node is the the first node, added it to the first
+                        if (resultNode == result.head)
+                        {
+                            result.AddFirst(currentNode.StockHolding);
+                        }
+                        else// if the previous node of current Node is not first node, added it to the location before the current node 
+                        {
+                            result.AddBefore(currentNode.StockHolding, resultNode, previousNode);
+                        }
+                        break;
+                    }
+                    else
+                    {
+                        previousNode = resultNode;// keep the location o the previousNode
+                        resultNode = resultNode.Next;
+                    }
+                }
+
+            }
+            this.head = null;
+            this.head = result.head;
+        }
+        //@author: qing qi
+        //param        : NA
+        //summary      : Sort the list alphabatically
+        //return       : NA
+        //return type  : NA
+        public void SortByName()
+        {
+            StockNode currentNode = this.head;
+            StockList result = new StockList();
+            StockNode previousNode = null;
+            for (; currentNode != null; currentNode = currentNode.Next)
+            {
+                StockNode resultNode = result.head;
+                while (true)
+                {
+                    if (resultNode == null)
+                    {
+                        result.AddLast(currentNode.StockHolding);
+                        break;
+                    }
+                    else if (currentNode.StockHolding.Name.CompareTo(resultNode.StockHolding.Name) < 0)//compare the name alphabatically
+                    {
+                        //if the the previous node of current Node is the the first node, added it to the first
+                        if (resultNode == result.head)
+                        {
+                            result.AddFirst(currentNode.StockHolding);
+                        }
+                        else
+                        {
+                            result.AddBefore(currentNode.StockHolding, resultNode, previousNode);
+                        }
+                        break;
+                    }
+                    else
+                    {
+                        previousNode = resultNode;// keep the location o the previousNode
+                        resultNode = resultNode.Next;
+                    }
+
+                }
+
+            }
+            this.head = null;
+            this.head = result.head;
+        }
 
     }
-
-    //param        : NA
-    //summary      : Sort the list alphabatically
-    //return       : NA
-    //return type  : NA
-    public void SortByName()
-    {
-      // write your implementation here
-
-    }
-  }
 }
