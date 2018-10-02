@@ -49,7 +49,6 @@
     <Compile Include="Stock.cs" />
     <Compile Include="StockList_Students_1.cs" />
     <Compile Include="StockList_Students_2.cs" />
-    <Compile Include="StockList_Students_3.cs" />
     <Compile Include="StockNode.cs" />
   </ItemGroup>
   <ItemGroup>
